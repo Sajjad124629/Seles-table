@@ -1,0 +1,14 @@
+{
+    "material design icons": {
+        "normal": "material_design_icons_normal_5a61377c6846af227212d52c7f9082f6"
+    },
+    "fontawesome": {
+        "normal": "fontawesome_normal_05e72f10e4670654d1a5baeeff151a23"
+    },
+    "rubik": {
+        "300": "E:\\laravel practice\\project2\\storage\\fonts\/rubik_300_038db8909f240b0712134f0f36149370",
+        "normal": "E:\\laravel practice\\project2\\storage\\fonts\/rubik_normal_ec947cbfa01d9f6f17cd8afe129764fc",
+        "500": "E:\\laravel practice\\project2\\storage\\fonts\/rubik_500_ed4649944f48c065b46efe4925e1ef51",
+        "bold": "rubik_bold_c260e0dde7c7b64752a2af1b462a025c"
+    }
+}
