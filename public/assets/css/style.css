@@ -4852,7 +4852,7 @@ input[type="button"].btn-block {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center; }
-  
+
   .btn-group-vertical > .btn,
   .fc .btn-group-vertical > button,
   .ajax-upload-dragdrop .btn-group-vertical > .ajax-file-upload,
@@ -15480,3 +15480,60 @@ dl {
   flex-grow: 1; }
 
 /*# sourceMappingURL=style.css.map */
+
+
+/*Pagination*/
+
+.pagination li:hover{
+    cursor: pointer;
+}
+.pagination{
+    margin-top: 20px;
+}
+.pagination .active{
+    background-color: red;
+}
+
+.pagination li{
+    display: inline-block;
+    font-weight: 400;
+    color: #343a40;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 3px 18px;
+    font-size: 0.875rem;
+    line-height: 1.71;
+    border-radius: 0.1875rem;
+    -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    color: #fff;
+    background-color: #3f50f6;
+    border-color: #3f50f6;
+    margin: 0 2px;
+}
+
+
+/*table Foot*/
+tfoot td{
+    font-weight: bold;
+}
+
+.report{
+    max-width: 250px;
+}
+
+
+table {
+    width: 100%;
+
+}
+

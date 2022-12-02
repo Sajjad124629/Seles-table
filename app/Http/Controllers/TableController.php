@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 
+
 class TableController extends Controller
 {
     //
@@ -62,7 +63,7 @@ class TableController extends Controller
         $search_data = sales::where('country','Like',"%{$search6}%")->get();
     }
     else{
-        $search_data = sales::paginate(100);
+        $search_data = sales::all();
     }
 
     $res = $search_data;
@@ -75,11 +76,11 @@ class TableController extends Controller
 
    public function generate_pdf(){
 
-    $search_data = sales::paginate(10);
+    $search_data = sales::paginate(100);
     $res = $search_data;
 
     $pdf = Pdf::loadView('pdf.table',["getdata"=>$res,]);
-    return $pdf->download('Sajjad.pdf');
+    return $pdf->download('info.pdf');
    }
    public function download_pdf(){
 

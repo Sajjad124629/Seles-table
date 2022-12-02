@@ -10,7 +10,10 @@
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css" />
     <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" />
-    <link rel="stylesheet" href="pagination.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+
+
+
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="shortcut icon" href="assets/images/favicon.png" />
   </head>
@@ -253,10 +256,10 @@
             </button>
           </div>
         </nav>
-        <div class="container " style="margin-top: 100px">
+        <div class="container " style="margin-top: 100px" >
 
-            <h2>Striped Rows</h2>
-            <p>The .table-striped class adds zebra-stripes to a table:</p>
+            <h2 class="mb-4">Purchase Report</h2>
+
 
 
 
@@ -265,24 +268,23 @@
             @endif --}}
 
 
-            <form action="" method="GET">
-              <div class="input-group input-navbar">
+            <form action="" method="GET" class="mb-3">
+               <div class="input-group input-navbar">
+                <button type="button" class="btn btn-primary mr-2">Daily</button>
+                <button type="submit" class="btn btn-primary">Date Range</button>
 
-                <input type="text" name="search_email" class="form-control" placeholder="Enter Email" aria-label="Username" aria-describedby="icon-addon1">
-                <input type="text" name="search_first_name" class="form-control" placeholder="Enter First Name" aria-label="Username" aria-describedby="icon-addon1">
-                <input type="text" name="search_last_name" class="form-control" placeholder="Enter Last Name" aria-label="Username" aria-describedby="icon-addon1">
-                <input type="text" name="search_company_name" class="form-control" placeholder="Enter Company Name" aria-label="Username" aria-describedby="icon-addon1">
-                <input type="date" name="search_date" class="form-control" placeholder="Enter Date" aria-label="Username" aria-describedby="icon-addon1">
-                <input type="text" name="search_country" class="form-control" placeholder="Enter Country" aria-label="Username" aria-describedby="icon-addon1">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <input type="date" name="search_date" class="form-control report" placeholder="Enter Date" aria-label="Username" aria-describedby="icon-addon1">
+                <input type="date" name="search_date1" class="form-control report" placeholder="Enter Date" aria-label="Username" aria-describedby="icon-addon1">
+                <a href="/genarate-pdf" class="btn btn-primary ml-2 mr-2">Export PDf</a>
+
+                <a href="/excel-export" class="btn btn-primary ml-2 mr-2">Export Excel</a>
               </div>
 
 
 
             </form>
 
-
-            <div class="container m-4">
+            <div class="container d-none m-4">
                 <div class="row">
                     <div class="col-4">
                         <!--		Show Numbers Of Rows 		-->
@@ -312,10 +314,12 @@
 
 
 
-            <table class="table table-striped" id="table-id">
+            <div class="table-responsive bf-table-responsive bf-table-responsive--zebra" style="overflow-x:auto;">
+
+            <table class="table table-striped display bf-table" id="table_id">
               <thead>
                 <tr>
-                  <th>S.N</th>
+                  <th></th>
                   <th>Email</th>
                   <th>Firstname</th>
                   <th>Lastname</th>
@@ -325,20 +329,21 @@
                 </tr>
               </thead>
               <tbody id="tablebody">
-                  @foreach ($getdata as $getdatas)
+                @foreach ($getdatas as $getdata)
+
+
                 <tr>
-                  <td>{{$loop->index+1}}</td>
-                  <td>{{$getdatas->email}}</td>
-                  <td>{{$getdatas->first}}</td>
-                  <td>{{$getdatas->last}}</td>
-                  <td>{{$getdatas->company}}</td>
-                  <td>{{$getdatas->created_at}}</td>
-                  <td>{{$getdatas->country}}</td>
-
-
+                    <td></td>
+                    <td>{{$getdata->email}}</td>
+                    <td>{{$getdata->first}}</td>
+                    <td>{{$getdata->last}}</td>
+                    <td>{{$getdata->company}}</td>
+                    <td>{{$getdata->created_at}}</td>
+                    <td>{{$getdata->country}}</td>
                 </tr>
-
                 @endforeach
+
+
 
               </tbody>
               <tfoot>
@@ -354,24 +359,7 @@
               </tfoot>
             </table>
 
-
-<!--		Start Pagination -->
-<div class='pagination-container'>
-    <nav>
-      <ul class="pagination">
-
-        <li data-page="prev" class="btn btn-primary">
-          <span>
-            < <span class="sr-only">(current)
-          </span></span>
-        </li>
-        <!--	Here the JS Function Will Add the Rows -->
-        <li data-page="next" id="prev" class="btn btn-primary">
-          <span> > <span class="sr-only">(current)</span></span>
-        </li>
-      </ul>
-    </nav>
-  </div>
+            </div>
 
 
 
@@ -414,25 +402,19 @@
     <script src="assets/js/dashboard.js"></script>
     <!-- End custom js for this page -->
 
-    <script>
-        $(document).ready(function () {
-
-            $('#input_search').keyup(function () {
-                var get_search_data = $(this).val().toLowerCase();
-                $('#tablebody tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(get_search_data)>-1)
-                 });
-            });
-
-         })
-    </script>
 
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="js/vendor/jquery.sortelements.js" type="text/javascript"></script>
 <script src="js/jquery.bdt.min.js" type="text/javascript"></script>
-<script src="simplepagination.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script>
 
 
 

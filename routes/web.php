@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\TableController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,15 @@ Route::get('/', function () {
 Route::get('/table',[TableController::class,'index']);
 
 Route::get('/genarate-pdf',[TableController::class,'generate_pdf']);
-Route::get('/download-pdf',[TableController::class,'download_pdf']);
+
+
+
+
+
+//purchase Route
+
+
+Route::get('/purchase-report',[PurchaseController::class,'purchase_view']);
+
+Route::get('/excel-export',[PurchaseController::class,'excel_export']);
+
