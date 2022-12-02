@@ -278,38 +278,14 @@
                 <a href="/genarate-pdf" class="btn btn-primary ml-2 mr-2">Export PDf</a>
 
                 <a href="/excel-export" class="btn btn-primary ml-2 mr-2">Export Excel</a>
+
+                <a href="/csv-export" class="btn btn-primary ml-2 mr-2">Export Csv</a>
               </div>
 
 
 
             </form>
 
-            <div class="container d-none m-4">
-                <div class="row">
-                    <div class="col-4">
-                        <!--		Show Numbers Of Rows 		-->
-              <select class="form-control form-select" aria-label="Default select example" name="state" id="maxRows">
-                  <option value="5000">Show ALL Rows</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="15">15</option>
-                  <option value="20">20</option>
-                  <option value="50">50</option>
-                  <option value="70">70</option>
-                  <option value="100">100</option>
-              </select>
-
-          </div>
-                    <div class="col-4">
-                        <input type="text" name=""  class="form-control" id="input_search" placeholder="Enter Search" aria-label="Username" aria-describedby="icon-addon1">
-
-                    </div>
-                    <div class="col-4">
-                        <a href="/genarate-pdf" class="btn btn-primary">Export PDf</a>
-                    </div>
-
-                </div>
-            </div>
 
 
 

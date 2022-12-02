@@ -27,4 +27,8 @@ class PurchaseController extends Controller
     public function excel_export(){
         return Excel::download(new ReportsExport, 'report.xlsx');
     }
+
+    public function csv_export(){
+        return Excel::download(new ReportsExport, 'report.csv');
+    }
 }

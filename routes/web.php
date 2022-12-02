@@ -33,5 +33,12 @@ Route::get('/genarate-pdf',[TableController::class,'generate_pdf']);
 
 Route::get('/purchase-report',[PurchaseController::class,'purchase_view']);
 
+//export excel file
+
 Route::get('/excel-export',[PurchaseController::class,'excel_export']);
+
+//export csv file
+
+Route::get('/csv-export',[PurchaseController::class,'csv_export']);
+
 
