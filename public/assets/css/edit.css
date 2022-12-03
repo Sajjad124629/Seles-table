@@ -1,0 +1,11 @@
+.card .card-title
+{
+    font-size: 25px;
+}
+
+.notes
+{
+    height: 150px;
+    display: flex;
+    align-items: center;
+}

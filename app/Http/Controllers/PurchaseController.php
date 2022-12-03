@@ -31,4 +31,17 @@ class PurchaseController extends Controller
     public function csv_export(){
         return Excel::download(new ReportsExport, 'report.csv');
     }
+
+
+    //payment field
+
+    public function payment_field(){
+        return view('purchase.paymentField');
+    }
+
+    //expense
+
+    public function expense(){
+        return view('purchase.expense');
+    }
 }

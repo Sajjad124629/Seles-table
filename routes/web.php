@@ -42,3 +42,12 @@ Route::get('/excel-export',[PurchaseController::class,'excel_export']);
 Route::get('/csv-export',[PurchaseController::class,'csv_export']);
 
 
+
+//payment route
+
+Route::get('/payment-insert', [PurchaseController::class, 'payment_field']);
+
+
+//expense and Salary
+
+Route::get('/expense', [PurchaseController::class, 'expense']);

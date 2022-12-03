@@ -268,7 +268,7 @@
             @endif --}}
 
 
-            <form action="" method="GET" class="mb-3">
+            <form action="" method="GET" class="mb-4">
                <div class="input-group input-navbar">
                 <button type="button" class="btn btn-primary mr-2">Daily</button>
                 <button type="submit" class="btn btn-primary">Date Range</button>
