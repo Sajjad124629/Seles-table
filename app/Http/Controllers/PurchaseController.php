@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ReportsExport;
 use App\Models\sales;
+use App\Models\Store;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -44,4 +45,6 @@ class PurchaseController extends Controller
     public function expense(){
         return view('purchase.expense');
     }
+
+    
 }

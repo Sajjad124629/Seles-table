@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Breeze Admin</title>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css" />
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css" />
@@ -271,18 +272,11 @@
                                   <form class="forms-sample">
 
                                     <div class="row ">
-
-
-
-
                                         <div class="card">
                                             <div class="card-body">
-
-                                                <div class="col-12 d-flex">
-                                                    <div class="col-md-2 mt-1 mb-4">
-                                                        <label for="exampleInputName1">Date:</label>
-                                                    </div>
-                                                    <div class="col-md-8">
+                                                <div class="row">
+                                                <div class="col-12 d-flex mb-4">
+                                                    <div class="col-md-6 d-flex">
                                                             @php
                                                                 $month = date('m');
                                                                 $day = date('d');
@@ -290,20 +284,12 @@
                                                                 $date= "{$year}-{$month}-{$day}";
 
                                                             @endphp
-                                                        <input type="date" value="@php echo $date @endphp" class="form-control" id="exampleInputPassword4" placeholder="">
+                                                        <label for="exampleInputName1" class="expenseLable">Date:</label>
+                                                        <input type="date" style="margin-left: 35px" name="date" id="date" value="@php echo $date @endphp" class="form-control" id="exampleInputPassword4" placeholder="">
                                                     </div>
-                                                </div>
-                                                
-                                                <div class="col-md-12">
-                                                    <button type="submit" class="btn btn-primary mr-2 float-end"> Save </button>
-                                                </div>
-
-                                                <div class="col-12 d-flex">
-                                                    <div class="col-md-2 mt-1 mb-4">
-                                                        <label for="exampleInputName1">Employee:</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <select class="form-select form-control" aria-label="Default select example">
+                                                    <div class="col-md-6 d-flex">
+                                                        <label for="exampleInputName1" class="expenseLable">Expense:</label>
+                                                        <select class="form-select form-control" name="expense" id="expense" aria-label="Default select example">
                                                             <option selected>XYZ</option>
                                                             <option value="1">One</option>
                                                             <option value="2">Two</option>
@@ -312,62 +298,75 @@
                                                     </div>
 
                                                 </div>
-                                            </div>
 
-                                        </div>
 
-                                        <div class="col-12 d-flex notes">
-                                            <div class="col-md-2 mt-1 mb-4">
-                                                <label for="exampleInputName1">Due:</label>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control" id="exampleInputPassword4" placeholder="">
-                                            </div>
-                                            <div class="col-md-4 text-center">
-                                                <label for="exampleInputName1">Notes</label>
-                                                <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex">
-                                            <div class="col-md-2 mt-1 mb-4">
-                                                <label for="exampleInputName1">Payment Method:</label>
-                                            </div>
-                                            <div class="col-md-8">
-                                                <select class="form-select form-control" aria-label="Default select example">
-                                                    <option selected>XYZ</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                  </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 d-flex">
-                                            <div class="col-md-2 mt-1 mb-4">
-                                                <label for="exampleInputName1">Bank:</label>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <select class="form-select form-control" aria-label="Default select example">
-                                                    <option selected>XYZ</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option>
-                                                  </select>
-                                            </div>
-                                            <div class="col-md-2 mt-1">
-                                                <label for="exampleInputEmail3">Cheque no:</label>
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control" id="exampleInputPassword4" placeholder="">
+
+                                                <div class="col-12 d-flex">
+
+                                                    <div class="col-md-6 d-flex">
+                                                        <label for="exampleInputName1" class="expenseLable">Employee:</label>
+                                                        <select class="form-select form-control" aria-label="Default select example">
+                                                            <option selected>---------Select---------</option>
+                                                            <option value="Mujahid">Mujahid</option>
+                                                            <option value="Manik">Manik</option>
+                                                            <option value="Ornob">Ornob</option>
+                                                          </select>
+                                                    </div>
+                                                    <div class="col-md-6 d-flex">
+                                                        <label for="Amount" class="expenseLable">Amount:</label>
+                                                        <input type="number" name="amount" id="amount" value="" class="form-control" placeholder="Enter Amount">
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-12 expense_button">
+                                                    <button type="submit" class="btn btn-primary mr-2 mt-4 text-right expense_button float-end"> Save </button>
+                                                </div>
+                                             </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <button type="submit" class="btn btn-primary mr-2 float-end"> Save </button>
-
                                   </form>
                                 </div>
+
+
+
                               </div>
                         </div>
+                    </div>
+
+                    <div class="col-lg-12 mt-4 grid-margin stretch-card">
+                        <div class="card">
+                            <div class="card-body">
+                        <div class="table-responsive mt-5">
+                            <table id="myTable" class="table table-striped display">
+                              <thead>
+                                <tr >
+                                  <th>S.N</th>
+                                  <th>Particulars</th>
+                                  <th>Notes</th>
+                                  <th>Amount</th>
+                                  <th>Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td>1</td>
+                                  <td>Test</td>
+                                  <td>Test</td>
+                                  <td>Test</td>
+
+                                  <td>
+                                    <a class="btn btn-dark btn-icon-text" class="text-light" href=""><i class="mdi mdi-tooltip-edit"></i></a>
+                                    <a class="btn btn-warning btn-icon-text" class="text-light" href=""><i class="mdi mdi-delete"></i></a>
+                                 </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                            </div>
+                        </div>
+
                     </div>
 
 
@@ -510,6 +509,9 @@
     <script src="assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="assets/vendors/chart.js/Chart.min.js"></script>
     <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <script src="assets/vendors/flot/jquery.flot.js"></script>
@@ -526,11 +528,19 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="assets/js/dashboard.js"></script>
+
     <!-- End custom js for this page -->
+
+<script>
+        $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+
+</script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
+
   </body>
 </html>
-

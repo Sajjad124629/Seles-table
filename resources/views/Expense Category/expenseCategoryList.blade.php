@@ -5,14 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Breeze Admin</title>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css" />
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css" />
     <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     <link rel="stylesheet" href="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/edit.css">
     <link rel="shortcut icon" href="assets/images/favicon.png" />
   </head>
   <body>
@@ -81,18 +83,10 @@
               <span class="menu-title">Charts</span>
             </a>
           </li>
-
-
           <li class="nav-item">
             <a class="nav-link" href="pages/tables/basic-table.html">
               <i class="mdi mdi-table-large menu-icon"></i>
               <span class="menu-title">Tables</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/table">
-              <i class="mdi mdi-table-large menu-icon"></i>
-              <span class="menu-title">Tables 2</span>
             </a>
           </li>
           <li class="nav-item">
@@ -254,97 +248,89 @@
             </button>
           </div>
         </nav>
-        <div class="container " style="margin-top: 100px" >
-
-            <h2 class="mb-4">Purchase Report</h2>
-
-
+        <div class="main-panel">
+            <div class="content-wrapper pb-0">
+        <!--Expense Section Start---->
 
 
-            {{-- @if ($count)
-            <p>{{$count}}</p>
-            @endif --}}
+        <div class="card">
+            <div class="card-body">
+                <div class="card-description"><a class="text-light btn btn-info" href="/add-expense-category">Add New Expense Category</a></div>
+
+                    @if (session()->has('success'))
+
+                    <div class="alert alert-success">{{session()->get('success')}}</div>
+
+                    @endif
+
+                    @if (session()->has('update'))
+
+                    <div class="alert alert-success">{{session()->get('update')}}</div>
+
+                    @endif
 
 
-            <form action="" method="GET" class="mb-4">
-               <div class="input-group input-navbar">
-                <button type="button" class="btn btn-primary mr-2">Daily</button>
-                <button type="submit" class="btn btn-primary">Date Range</button>
+              </p>
+              <div class="table-responsive">
+                <table id="myTable" class="table table-striped display">
+                  <thead>
+                    <tr >
+                      <th>S.N</th>
+                      <th>Expense Category Name</th>
+                      <th>Default</th>
+                      <th>Status</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
 
-                <input type="date" name="search_date" class="form-control report" placeholder="Enter Date" aria-label="Username" aria-describedby="icon-addon1">
-                <input type="date" name="search_date1" class="form-control report" placeholder="Enter Date" aria-label="Username" aria-describedby="icon-addon1">
-                <a href="/genarate-pdf" class="btn btn-primary ml-2 mr-2">Export PDf</a>
+                       @foreach ( $all_expense_category_datas  as $item )
+                    <tr>
+                      <td>{{$loop->index+1}}</td>
+                      <td>{{ $item->expense_category_name}}</td>
+                        @if ($item->is_default==1)
 
-                <a href="/excel-export" class="btn btn-primary ml-2 mr-2">Export Excel</a>
+                      <td>Default</td>
 
-                <a href="/csv-export" class="btn btn-primary ml-2 mr-2">Export Csv</a>
+                      @else
+                      <td>Not Default</td>
+                      @endif
+
+                      @if ($item->is_active==1)
+
+                      <td>Active</td>
+
+                      @else
+                      <td>No Active</td>
+                      @endif
+                      <td><a class="btn btn-warning" class="text-light" href="/edit-expense-category/{{$item->expense_category_id}}">Edit</a></td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
               </div>
-
-
-
-            </form>
-
-
-
-
-
-            <div class="table-responsive bf-table-responsive bf-table-responsive--zebra" style="overflow-x:auto;">
-
-            <table class="table table-striped display bf-table" id="table_id">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Email</th>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>company</th>
-                  <th>created_at</th>
-                  <th>country</th>
-                </tr>
-              </thead>
-              <tbody id="tablebody">
-                @foreach ($getdatas as $getdata)
-
-
-                <tr>
-                    <td></td>
-                    <td>{{$getdata->email}}</td>
-                    <td>{{$getdata->first}}</td>
-                    <td>{{$getdata->last}}</td>
-                    <td>{{$getdata->company}}</td>
-                    <td>{{$getdata->created_at}}</td>
-                    <td>{{$getdata->country}}</td>
-                </tr>
-                @endforeach
-
-
-
-              </tbody>
-              <tfoot>
-                <tr>
-                    <td>Total</td>
-                    <td>$180</td>
-                    <td>$180</td>
-                    <td>$180</td>
-                    <td>$180</td>
-                    <td>$180</td>
-                    <td>$180</td>
-                  </tr>
-              </tfoot>
-            </table>
-
             </div>
-
-
-
-
           </div>
 
-          <style>
-              .w-5{
-                display:none;
-            }
-            </style>
+
+
+        <!--Expense Section End---->
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <!-- main-panel ends -->
       </div>
@@ -352,9 +338,14 @@
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
+
+
     <script src="assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="assets/vendors/chart.js/Chart.min.js"></script>
     <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <script src="assets/vendors/flot/jquery.flot.js"></script>
@@ -368,28 +359,21 @@
     <script src="assets/js/off-canvas.js"></script>
     <script src="assets/js/hoverable-collapse.js"></script>
     <script src="assets/js/misc.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="assets/js/dashboard.js"></script>
+
     <!-- End custom js for this page -->
 
-
-
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="js/vendor/jquery.sortelements.js" type="text/javascript"></script>
-<script src="js/jquery.bdt.min.js" type="text/javascript"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-
 <script>
-    $(document).ready( function () {
-    $('#table_id').DataTable();
-} );
+        $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+
 </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 
   </body>
