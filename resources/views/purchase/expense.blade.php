@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Breeze Admin</title>
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
@@ -269,7 +270,8 @@
                                 <div class="card-body">
                                   <h1 class="card-title tabs-style mb-5">Expenses</h1>
 
-                                  <form class="forms-sample">
+                                    <div id="show_message_error"></div>
+                                    <div id="show_message_success"></div>
 
                                     <div class="row ">
                                         <div class="card">
@@ -285,15 +287,15 @@
 
                                                             @endphp
                                                         <label for="exampleInputName1" class="expenseLable">Date:</label>
-                                                        <input type="date" style="margin-left: 35px" name="date" id="date" value="@php echo $date @endphp" class="form-control" id="exampleInputPassword4" placeholder="">
+                                                        <input type="date" style="margin-left: 35px" name="date" id="date" value="@php echo $date @endphp" class="form-control" id="exampleInputPassword4" placeholder="" required>
                                                     </div>
                                                     <div class="col-md-6 d-flex">
                                                         <label for="exampleInputName1" class="expenseLable">Expense:</label>
-                                                        <select class="form-select form-control" name="expense" id="expense" aria-label="Default select example">
-                                                            <option selected>XYZ</option>
-                                                            <option value="1">One</option>
-                                                            <option value="2">Two</option>
-                                                            <option value="3">Three</option>
+                                                        <select class="form-select form-control" name="expense" id="expense" aria-label="Default select example" required>
+                                                            <option value="" selected>-----Select-----</option>
+                                                            <option value="One">One</option>
+                                                            <option value="Two">Two</option>
+                                                            <option value="Three">Three</option>
                                                           </select>
                                                     </div>
 
@@ -305,8 +307,8 @@
 
                                                     <div class="col-md-6 d-flex">
                                                         <label for="exampleInputName1" class="expenseLable">Employee:</label>
-                                                        <select class="form-select form-control" aria-label="Default select example">
-                                                            <option selected>---------Select---------</option>
+                                                        <select class="form-select form-control" name="employee" id="employee" aria-label="Default select example" required>
+                                                            <option value="" selected>---------Select---------</option>
                                                             <option value="Mujahid">Mujahid</option>
                                                             <option value="Manik">Manik</option>
                                                             <option value="Ornob">Ornob</option>
@@ -314,19 +316,20 @@
                                                     </div>
                                                     <div class="col-md-6 d-flex">
                                                         <label for="Amount" class="expenseLable">Amount:</label>
-                                                        <input type="number" name="amount" id="amount" value="" class="form-control" placeholder="Enter Amount">
+                                                        <input type="number" name="amount" id="amount" value="" class="form-control" placeholder="Enter Amount" required="">
 
                                                     </div>
 
                                                 </div>
                                                 <div class="col-md-12 expense_button">
-                                                    <button type="submit" class="btn btn-primary mr-2 mt-4 text-right expense_button float-end"> Save </button>
+                                                    <button type="button"  id="add_expense" class="btn btn-primary mr-2 mt-4 text-right expense_button float-end"> Save </button>
+
                                                 </div>
                                              </div>
                                             </div>
                                         </div>
                                     </div>
-                                  </form>
+
                                 </div>
 
 
@@ -350,18 +353,14 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                  <td>1</td>
-                                  <td>Test</td>
-                                  <td>Test</td>
-                                  <td>Test</td>
 
-                                  <td>
-                                    <a class="btn btn-dark btn-icon-text" class="text-light" href=""><i class="mdi mdi-tooltip-edit"></i></a>
-                                    <a class="btn btn-warning btn-icon-text" class="text-light" href=""><i class="mdi mdi-delete"></i></a>
-                                 </td>
-                                </tr>
                               </tbody>
+                              <tfoot>
+                                <tr>
+                                    <td colspan="3">Total</td>
+                                    <td id="sum_amount"></td>
+                                </tr>
+                              </tfoot>
                             </table>
                           </div>
                             </div>
@@ -510,8 +509,14 @@
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="assets/vendors/chart.js/Chart.min.js"></script>
     <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <script src="assets/vendors/flot/jquery.flot.js"></script>
@@ -533,13 +538,108 @@
 
 <script>
         $(document).ready( function () {
-        $('#myTable').DataTable();
-    } );
+          $.ajaxSetup({
+                        headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                }
+                           });
+
+
+        getdata() //call expenses function
+         //get data form expenses
+
+         function getdata(){
+            $.ajax({
+              type: "GET",
+              url: "/fetch-expense",
+              dataType: "json",
+              success: function (response) {
+                $('#sum_amount').text(response.amount);
+                $('tbody').html('');
+                $.each(response.expense, function (key, item) {
+                  $('tbody').append(
+                    '<tr>\
+                                  <td>'+(key+1)+'</td>\
+                                  <td>Test</td>\
+                                  <td>'+item.notes+'</td>\
+                                  <td>'+item.amount+'</td>\
+                                  <td><button value="'+item.expense_details_id+'" class="btn mr-2 btn-dark btn-sm btn-icon-text" class="text-light"><i class="mdi mdi-tooltip-edit"></i> </button><button value="'+item.expense_details_id+'" id="delete" class="btn btn-warning btn-sm btn-icon-text" class="text-light" ><i class="mdi mdi-delete"></i></button></td>\
+                                </tr>'
+                  );
+                });
+
+              }
+            });
+         }
+
+
+        //post ajax in expense
+
+        $(document).on('click','#add_expense', function (event) {
+            event.preventDefault();
+
+
+           var data = {
+            'date':$('#date').val(),
+            'expense':$('#expense').val(),
+            'employee':$('#employee').val(),
+            'amount':$('#amount').val(),
+           }
+
+            // console.log(data);
+
+            $.ajax({
+              type: "POST",
+              url: "/expense",
+              data: data,
+              dataType: "json",
+              success: function (response) {
+                  if(response.status==400){
+                                $('#show_message_error').html('');
+                                $('#show_message_error').addClass('alert alert-danger');
+                                $('#show_message_error').text(response.errors);
+                                $('#expense').val(''),
+                                $('#amount').val(''),
+                                $('#employee').val('');
+                  }
+                  else{
+                    $('#show_message_success').addClass('alert alert-success');
+                    $('#show_message_success').text(response.success);
+                    $('#expense').val(''),
+                    $('#amount').val(''),
+                    $('#employee').val('');
+                    getdata() //call expenses function
+                  }
+              }
+
+
+            });
+
+
+            });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          });
+
 
 </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 
 
   </body>

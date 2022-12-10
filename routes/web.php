@@ -54,6 +54,8 @@ Route::get('/payment-insert', [PurchaseController::class, 'payment_field']);
 //expense and Salary
 
 Route::get('/expense', [PurchaseController::class, 'expense']);
+Route::post('/expense', [PurchaseController::class, 'insert']);
+Route::get('/fetch-expense', [PurchaseController::class, 'getdata']);
 
 
 
