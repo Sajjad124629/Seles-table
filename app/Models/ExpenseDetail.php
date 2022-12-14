@@ -11,7 +11,7 @@ class ExpenseDetail extends Model
 
     protected $table = "expense_details";
 
-    protected $primaryKey = "expense_details_id ";
+    protected $primaryKey = "expense_details_id";
 
     protected $fillable = [
         'expense_id',

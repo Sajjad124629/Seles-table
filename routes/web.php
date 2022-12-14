@@ -57,6 +57,13 @@ Route::get('/expense', [PurchaseController::class, 'expense']);
 Route::post('/expense', [PurchaseController::class, 'insert']);
 Route::get('/fetch-expense', [PurchaseController::class, 'getdata']);
 
+Route::get('/edit-expense/{id}', [PurchaseController::class, 'edit_expense']);
+
+Route::put('/update-expense/{id}', [PurchaseController::class, 'update_expense']);
+
+Route::get('/delete-expense/{id}', [PurchaseController::class, 'delete_expense']);
+
+
 
 
 

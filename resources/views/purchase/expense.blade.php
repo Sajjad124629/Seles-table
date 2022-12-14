@@ -43,7 +43,7 @@
           <li class="nav-item">
             <a class="nav-link" href="index.html">
               <i class="mdi mdi-home menu-icon"></i>
-              <span class="menu-title">Dashboard</span>
+              <span  class="menu-title">Dashboard</span>
             </a>
           </li>
           <li class="nav-item">
@@ -250,6 +250,50 @@
           </div>
         </nav>
 
+
+
+
+
+      <!-- Start Expense Modal -->
+      <div class="modal fade" id="editExpense" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Update Expense</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <input type="text" id="expenseDetailsId" hidden>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="exampleInputUsername1">Notes:</label>
+                <input type="text" value="" name="edit_notes" id="edit_notes" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputUsername1">Particulars:</label>
+                <select class="form-select form-control" name="edit_expense" id="edit_expense" aria-label="Default select example" required>
+                  <option value="" selected>-----Select-----</option>
+                  <option value="One">One</option>
+                  <option  value="Two">Two</option>
+                  <option value="Three">Three</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputUsername1">Amount:</label>
+                <input type="number" name="edit_amount" id="edit_amount" value="" class="form-control" placeholder="Enter Amount">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" id="update_expense" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- End Expense Modal -->
+
+
+
         <!---Start Edit--->
 
         <div class="main-panel">
@@ -265,108 +309,117 @@
                   </nav>
                   <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                        <div class="container">
-                            <div class="card">
-                                <div class="card-body">
-                                  <h1 class="card-title tabs-style mb-5">Expenses</h1>
+
+
+                              <div class="col-12 grid-margin">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <h4 class="card-title mb-5">Expenses</h4>
 
                                     <div id="show_message_error"></div>
                                     <div id="show_message_success"></div>
 
-                                    <div class="row ">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                <div class="col-12 d-flex mb-4">
-                                                    <div class="col-md-6 d-flex">
-                                                            @php
-                                                                $month = date('m');
-                                                                $day = date('d');
-                                                                $year = date('Y');
-                                                                $date= "{$year}-{$month}-{$day}";
+                                    <form class="form-sample">
 
-                                                            @endphp
-                                                        <label for="exampleInputName1" class="expenseLable">Date:</label>
-                                                        <input type="date" style="margin-left: 35px" name="date" id="date" value="@php echo $date @endphp" class="form-control" id="exampleInputPassword4" placeholder="" required>
-                                                    </div>
-                                                    <div class="col-md-6 d-flex">
-                                                        <label for="exampleInputName1" class="expenseLable">Expense:</label>
-                                                        <select class="form-select form-control" name="expense" id="expense" aria-label="Default select example" required>
-                                                            <option value="" selected>-----Select-----</option>
-                                                            <option value="One">One</option>
-                                                            <option value="Two">Two</option>
-                                                            <option value="Three">Three</option>
-                                                          </select>
-                                                    </div>
+                                      <div class="row">
+                                        <div class="col-md-6">
 
-                                                </div>
+                                          @php
+                                          $month = date('m');
+                                          $day = date('d');
+                                          $year = date('Y');
+                                          $date= "{$year}-{$month}-{$day}";
 
+                                      @endphp
 
-
-                                                <div class="col-12 d-flex">
-
-                                                    <div class="col-md-6 d-flex">
-                                                        <label for="exampleInputName1" class="expenseLable">Employee:</label>
-                                                        <select class="form-select form-control" name="employee" id="employee" aria-label="Default select example" required>
-                                                            <option value="" selected>---------Select---------</option>
-                                                            <option value="Mujahid">Mujahid</option>
-                                                            <option value="Manik">Manik</option>
-                                                            <option value="Ornob">Ornob</option>
-                                                          </select>
-                                                    </div>
-                                                    <div class="col-md-6 d-flex">
-                                                        <label for="Amount" class="expenseLable">Amount:</label>
-                                                        <input type="number" name="amount" id="amount" value="" class="form-control" placeholder="Enter Amount" required="">
-
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-12 expense_button">
-                                                    <button type="button"  id="add_expense" class="btn btn-primary mr-2 mt-4 text-right expense_button float-end"> Save </button>
-
-                                                </div>
-                                             </div>
+                                          <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Date:</label>
+                                            <div class="col-sm-9">
+                                              <input type="date" name="date" id="date" value="@php echo $date @endphp"  class="form-control">
                                             </div>
+                                          </div>
                                         </div>
+                                        <div class="col-md-6">
+                                          <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Notes:</label>
+                                            <div class="col-sm-9">
+                                              <input type="text" name="notes" id="notes" class="form-control">
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                          <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Expense:</label>
+                                            <div class="col-sm-9">
+                                              <select class="form-select form-control" name="expense" id="expense" aria-label="Default select example" required>
+                                                <option value="" selected>-----Select-----</option>
+                                                <option value="One">One</option>
+                                                <option value="Two">Two</option>
+                                                <option value="Three">Three</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Amount:</label>
+                                            <div class="col-sm-9">
+                                              <input type="number" name="amount" id="amount" value="" class="form-control" placeholder="Enter Amount" required="">
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-md-12 expense_button">
+                                        <button type="button"  id="add_expense" class="btn btn-primary mr-2 mt-4 text-right expense_button float-end"> Save </button>
+
                                     </div>
 
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                                <div class="card mt-4 grid-margin stretch-card">
+                                    <div class="card-body">
+                                <div class="table-responsive mt-5">
+                                    <table id="myTable" class="table table-striped display">
+                                      <thead>
+                                        <tr >
+                                          <th>S.N</th>
+                                          <th>Particulars</th>
+                                          <th>Notes</th>
+                                          <th class="text-right">Amount</th>
+                                          <th class="text-center">Action</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody id="expense_tbody">
+
+                                      </tbody>
+                                      <tfoot>
+                                        <tr>
+                                            <td colspan="3">Total</td>
+                                            <td class="text-right" id="sum_amount"></td>
+                                        </tr>
+                                      </tfoot>
+                                    </table>
+                                  </div>
+                                    </div>
                                 </div>
 
 
 
-                              </div>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-12 mt-4 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                        <div class="table-responsive mt-5">
-                            <table id="myTable" class="table table-striped display">
-                              <thead>
-                                <tr >
-                                  <th>S.N</th>
-                                  <th>Particulars</th>
-                                  <th>Notes</th>
-                                  <th>Amount</th>
-                                  <th>Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-
-                              </tbody>
-                              <tfoot>
-                                <tr>
-                                    <td colspan="3">Total</td>
-                                    <td id="sum_amount"></td>
-                                </tr>
-                              </tfoot>
-                            </table>
-                          </div>
-                            </div>
                         </div>
 
+
                     </div>
+
+
 
 
 
@@ -545,6 +598,10 @@
                            });
 
 
+
+
+
+
         getdata() //call expenses function
          //get data form expenses
 
@@ -555,15 +612,15 @@
               dataType: "json",
               success: function (response) {
                 $('#sum_amount').text(response.amount);
-                $('tbody').html('');
+                $('#expense_tbody').html('');
                 $.each(response.expense, function (key, item) {
-                  $('tbody').append(
+                  $('#expense_tbody').append(
                     '<tr>\
                                   <td>'+(key+1)+'</td>\
-                                  <td>Test</td>\
+                                  <td>'+item.expense_name+'</td>\
                                   <td>'+item.notes+'</td>\
-                                  <td>'+item.amount+'</td>\
-                                  <td><button value="'+item.expense_details_id+'" class="btn mr-2 btn-dark btn-sm btn-icon-text" class="text-light"><i class="mdi mdi-tooltip-edit"></i> </button><button value="'+item.expense_details_id+'" id="delete" class="btn btn-warning btn-sm btn-icon-text" class="text-light" ><i class="mdi mdi-delete"></i></button></td>\
+                                  <td style="text-align: end;">'+item.amount+'</td>\
+                                  <td style="display:flex;justify-content:center;"><button value="'+item.expense_details_id+'" id="edit_expense" class="btn mr-2 btn-dark btn-sm btn-icon-text" class="text-light"><i class="mdi mdi-tooltip-edit"></i> </button><button value="'+item.expense_details_id+'" id="delete_expense" class="btn btn-warning btn-sm btn-icon-text" class="text-light" ><i class="mdi mdi-delete"></i></button></td>\
                                 </tr>'
                   );
                 });
@@ -571,6 +628,80 @@
               }
             });
          }
+
+
+             //edit Expense
+
+             $(document).on('click','#edit_expense',function (event) {
+                event.preventDefault();
+                var expense_details_id = $(this).val();
+
+
+                $('#editExpense').modal('show');
+
+                $.ajax({
+                  type: "GET",
+                  url: "/edit-expense/"+expense_details_id,
+                  success: function (response) {
+                      if(response.status==200){
+                        $('#edit_notes').val(response.expenseDetails.notes);
+                        $('#edit_expense').val(response.expense.expense_name);
+                        $('#edit_amount').val(response.expenseDetails.amount);
+                        $('#expenseDetailsId').val(response.expenseDetails.expense_details_id)
+
+
+                      }
+                  }
+                });
+
+             });
+
+             //update Expense
+
+             $(document).on('click','#update_expense', function (event) {
+              event.preventDefault();
+              var expenseDetailsId =  $('#expenseDetailsId').val();
+
+              var data = {
+            'expense':$('#edit_notes').val(),
+            'notes':$('#edit_expense').val(),
+            'amount':$('#edit_amount').val(),
+           }
+
+            // console.log(data);
+            $.ajax({
+              type: "PUT",
+              url: "/update-expense/"+expenseDetailsId,
+              data: data,
+              dataType: "json",
+              success: function (response) {
+                if(response.status==400){
+                                $('#show_message_error').html('');
+                                $('#show_message_error').addClass('alert alert-danger');
+                                $('#show_message_error').text(response.errors);
+                                $('#editExpense').modal('hide');
+                                $("#show_message_error").show().delay(3000).queue(function(n) {
+                                      $(this).hide(); n();
+                                    });
+
+
+                  }
+                  else{
+                    $('#show_message_success').addClass('alert alert-success');
+                    $('#show_message_success').text(response.success);
+                    $('#editExpense').modal('hide');
+                    $("#show_message_success").show().delay(3000).queue(function(n) {
+                                      $(this).hide(); n();
+                                    });
+                    $('#expense').val(''),
+                    $('#amount').val(''),
+                    $('#notes').val('');
+                    getdata() //call expenses function
+                  }
+              }
+            });
+
+             });
 
 
         //post ajax in expense
@@ -582,11 +713,11 @@
            var data = {
             'date':$('#date').val(),
             'expense':$('#expense').val(),
-            'employee':$('#employee').val(),
+            'notes':$('#notes').val(),
             'amount':$('#amount').val(),
            }
 
-            // console.log(data);
+            console.log(data);
 
             $.ajax({
               type: "POST",
@@ -598,16 +729,23 @@
                                 $('#show_message_error').html('');
                                 $('#show_message_error').addClass('alert alert-danger');
                                 $('#show_message_error').text(response.errors);
-                                $('#expense').val(''),
-                                $('#amount').val(''),
-                                $('#employee').val('');
+                                $("#show_message_error").show().delay(3000).queue(function(n) {
+                                      $(this).hide(); n();
+                                    });
+
+                                // $('#expense').val(''),
+                                // $('#amount').val(''),
+                                // $('#employee').val('');
                   }
                   else{
                     $('#show_message_success').addClass('alert alert-success');
                     $('#show_message_success').text(response.success);
+                    $("#show_message_success").show().delay(3000).queue(function(n) {
+                                      $(this).hide(); n();
+                                    });
                     $('#expense').val(''),
                     $('#amount').val(''),
-                    $('#employee').val('');
+                    $('#notes').val('');
                     getdata() //call expenses function
                   }
               }
@@ -618,6 +756,33 @@
 
             });
 
+
+
+            $(document).on('click','#delete_expense', function (event) {
+
+              event.preventDefault();
+
+              var expense_details_id = $(this).val();
+
+              $.ajax({
+                type: "GET",
+                url: "/delete-expense/"+expense_details_id,
+                success: function (response) {
+                    if(response.status==200){
+                                $('#show_message_error').html('');
+                                $('#show_message_error').addClass('alert alert-danger');
+                                $('#show_message_error').text(response.delete);
+                                $("#show_message_error").show().delay(3000).queue(function(n) {
+                                      $(this).hide(); n();
+                                    });
+
+                                getdata() //call expenses function
+
+                    }
+                }
+              });
+
+            });
 
 
 

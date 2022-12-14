@@ -15555,3 +15555,9 @@ table {
     display: flex;
     justify-content: end;
 }
+
+
+td:nth-child(3)
+{
+  overflow-x: scroll;
+}

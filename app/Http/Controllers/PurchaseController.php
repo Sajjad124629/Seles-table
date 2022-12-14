@@ -59,7 +59,7 @@ class PurchaseController extends Controller
         $validator = Validator::make($request->all(), [
             'date'=>'required',
             'expense'=>'required',
-            'employee'=>'required',
+            'notes'=>'required',
             'amount'=>'required|numeric|min:0',
         ]);
 
@@ -86,6 +86,7 @@ class PurchaseController extends Controller
 
             $get_details->date = $request->date;
             $get_details->amount = $request->amount;
+            $get_details->notes = $request->notes;
             $get_details->expense_id =  $get_expense->expense_id;
             $get_details->save();
              return response()->json([
@@ -111,6 +112,78 @@ class PurchaseController extends Controller
             'amount'=>$getsub_expense
         ]);
 
+    }
+
+    public function edit_expense($id){
+        $getExpenseDetails = ExpenseDetail::find($id);
+
+
+
+        $getExpense = Expense::find($getExpenseDetails->expense_id);
+
+        return response()->json([
+            'status' => 200,
+            'expenseDetails' => $getExpenseDetails,
+            'expense' => $getExpense
+        ]);
+    }
+
+    public function update_expense(Request $request,$id){
+        $validator = Validator::make($request->all(), [
+
+            'expense'=>'required',
+            'notes'=>'required',
+            'amount'=>'required|numeric|min:0',
+        ]);
+
+        if($request->amount<0){
+            return response()->json([
+                'status'=>400,
+                'errors'=>'Amount Section must be positive'
+            ]);
+        }
+
+        if($validator->fails()){
+            return response()->json([
+                'status'=>400,
+                'errors'=>'Update Fail Fill All Section'
+            ]);
+        }
+        else{
+            $getExpenseDetails = ExpenseDetail::find($id);
+
+            $getExpenseData = Expense::find($getExpenseDetails->expense_id);
+
+            $getExpenseData->expense_name = $request->expense;
+            $getExpenseData->save();
+
+            $getExpenseDetails->amount = $request->amount;
+            $getExpenseDetails->notes = $request->notes;
+
+            $getExpenseDetails->save();
+
+            return response()->json([
+                'status'=>200,
+                'success'=>'Expense Update Successfully'
+            ]);
+        }
+    }
+
+    public function delete_expense($id){
+        $getExpenseDetails = ExpenseDetail::find($id);
+
+
+
+        $getExpense = Expense::find($getExpenseDetails->expense_id);
+
+        $getExpense->delete();
+
+        $getExpenseDetails->delete();
+
+        return response()->json([
+            'status' => 200,
+            'delete' => 'Expense Delete Successfully'
+        ]);
     }
 
 
