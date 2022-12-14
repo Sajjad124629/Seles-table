@@ -417,131 +417,135 @@
                         </div>
 
 
-                    </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                          <div class="container">
+                              <div class="card">
+                                  <div class="card-body">
+                                      <h1 class="card-title tabs-style mb-5">Customer Payment(for due)</h1>
 
+                                      <form class="forms-sample">
 
+                                        <div class="row ">
+                                            <div class="col-12 d-flex">
+                                                <div class="col-md-2 mt-1 mb-4">
+                                                    <label for="exampleInputName1">Customer Id:</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <select class="form-select form-control" aria-label="Default select example">
+                                                        <option selected>XYZ</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                      </select>
 
-
-
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                        <div class="container">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h1 class="card-title tabs-style mb-5">Customer Payment(for due)</h1>
-
-                                    <form class="forms-sample">
-
-                                      <div class="row ">
-                                          <div class="col-12 d-flex">
-                                              <div class="col-md-2 mt-1 mb-4">
-                                                  <label for="exampleInputName1">Customer Id:</label>
-                                              </div>
-                                              <div class="col-md-8">
-                                                  <select class="form-select form-control" aria-label="Default select example">
-                                                      <option selected>XYZ</option>
-                                                      <option value="1">One</option>
-                                                      <option value="2">Two</option>
-                                                      <option value="3">Three</option>
-                                                    </select>
-
-                                              </div>
-                                          </div>
-
-                                          <div class="col-12 d-flex">
-                                              <div class="col-md-2 mt-1 mb-4">
-                                                  <label for="exampleInputName1">Invoice:</label>
-                                              </div>
-                                              <div class="col-md-8">
-                                                  <select class="form-select form-control" aria-label="Default select example">
-                                                      <option selected>XYZ</option>
-                                                      <option value="1">One</option>
-                                                      <option value="2">Two</option>
-                                                      <option value="3">Three</option>
-                                                    </select>
-
-                                              </div>
-                                          </div>
-                                          <div class="col-12 d-flex">
-                                              <div class="col-md-2 mt-1 mb-4">
-                                                  <label for="exampleInputName1">Payable:</label>
-                                              </div>
-                                              <div class="col-md-8">
-                                                  <input type="text" class="form-control" id="exampleInputPassword4" placeholder="">
-                                              </div>
-                                          </div>
-                                          <div class="col-12 d-flex">
-                                              <div class="col-md-2 mt-1 mb-4">
-                                                  <label for="exampleInputName1">Paid:</label>
-                                              </div>
-                                              <div class="col-md-8">
-                                                  <input type="text" class="form-control" id="exampleInputPassword4" placeholder="">
-                                              </div>
-                                          </div>
-                                          <div class="col-12 d-flex notes">
-                                              <div class="col-md-2 mt-1 mb-4">
-                                                  <label for="exampleInputName1">Due:</label>
-                                              </div>
-                                              <div class="col-md-4">
-                                                  <input type="text" class="form-control" id="exampleInputPassword4" placeholder="">
-                                              </div>
-                                              <div class="col-md-4 text-center">
-                                                  <label for="exampleInputName1">Notes</label>
-                                                  <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
-                                              </div>
-                                          </div>
-                                          <div class="col-12 d-flex">
-                                              <div class="col-md-2 mt-1 mb-4">
-                                                  <label for="exampleInputName1">Payment Method:</label>
-                                              </div>
-                                              <div class="col-md-8">
-                                                  <select class="form-select form-control" aria-label="Default select example">
-                                                      <option selected>XYZ</option>
-                                                      <option value="1">One</option>
-                                                      <option value="2">Two</option>
-                                                      <option value="3">Three</option>
-                                                    </select>
-                                              </div>
-                                          </div>
-                                          <div class="col-12 d-flex">
-                                              <div class="col-md-2 mt-1 mb-4">
-                                                  <label for="exampleInputName1">Bank:</label>
-                                              </div>
-                                              <div class="col-md-4">
-                                                  <select class="form-select form-control" aria-label="Default select example">
-                                                      <option selected>XYZ</option>
-                                                      <option value="1">One</option>
-                                                      <option value="2">Two</option>
-                                                      <option value="3">Three</option>
-                                                    </select>
-                                              </div>
-                                              <div class="col-md-2 mt-1">
-                                                  <label for="exampleInputEmail3">Cheque no:</label>
-                                              </div>
-                                              <div class="col-md-4">
-                                                  <input type="text" class="form-control" id="exampleInputPassword4" placeholder="">
-                                              </div>
-                                          </div>
-                                          <div class="col-12 d-flex">
-                                            <div class="col-md-2 mt-1 mb-4">
-                                                <label for="exampleInputName1">Trx No:</label>
+                                                </div>
                                             </div>
-                                            <div class="col-md-8">
-                                                <input type="text" class="form-control" id="exampleInputPassword4" placeholder="">
 
+                                            <div class="col-12 d-flex">
+                                                <div class="col-md-2 mt-1 mb-4">
+                                                    <label for="exampleInputName1">Invoice:</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <select class="form-select form-control" aria-label="Default select example">
+                                                        <option selected>XYZ</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                      </select>
+
+                                                </div>
                                             </div>
-                                            <div class="col-md-2">
-                                                <button type="submit" class="btn btn-primary mr-2 float-end"> Save </button>
+                                            <div class="col-12 d-flex">
+                                                <div class="col-md-2 mt-1 mb-4">
+                                                    <label for="exampleInputName1">Payable:</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" id="exampleInputPassword4" placeholder="">
+                                                </div>
                                             </div>
+                                            <div class="col-12 d-flex">
+                                                <div class="col-md-2 mt-1 mb-4">
+                                                    <label for="exampleInputName1">Paid:</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" class="form-control" id="exampleInputPassword4" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 d-flex notes">
+                                                <div class="col-md-2 mt-1 mb-4">
+                                                    <label for="exampleInputName1">Due:</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" id="exampleInputPassword4" placeholder="">
+                                                </div>
+                                                <div class="col-md-4 text-center">
+                                                    <label for="exampleInputName1">Notes</label>
+                                                    <textarea class="form-control" id="exampleTextarea1" rows="4"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 d-flex">
+                                                <div class="col-md-2 mt-1 mb-4">
+                                                    <label for="exampleInputName1">Payment Method:</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <select class="form-select form-control" aria-label="Default select example">
+                                                        <option selected>XYZ</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                      </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 d-flex">
+                                                <div class="col-md-2 mt-1 mb-4">
+                                                    <label for="exampleInputName1">Bank:</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <select class="form-select form-control" aria-label="Default select example">
+                                                        <option selected>XYZ</option>
+                                                        <option value="1">One</option>
+                                                        <option value="2">Two</option>
+                                                        <option value="3">Three</option>
+                                                      </select>
+                                                </div>
+                                                <div class="col-md-2 mt-1">
+                                                    <label for="exampleInputEmail3">Cheque no:</label>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <input type="text" class="form-control" id="exampleInputPassword4" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 d-flex">
+                                              <div class="col-md-2 mt-1 mb-4">
+                                                  <label for="exampleInputName1">Trx No:</label>
+                                              </div>
+                                              <div class="col-md-8">
+                                                  <input type="text" class="form-control" id="exampleInputPassword4" placeholder="">
+
+                                              </div>
+                                              <div class="col-md-2">
+                                                  <button type="submit" class="btn btn-primary mr-2 float-end"> Save </button>
+                                              </div>
+                                          </div>
                                         </div>
-                                      </div>
 
 
 
-                                    </form>
-                                  </div>
-                              </div>
-                        </div>
+                                      </form>
+                                    </div>
+                                </div>
+                          </div>
+                      </div>
+
+
+
                     </div>
+
+
+
+
+
+
 
                   </div>
             </div>
