@@ -15557,7 +15557,34 @@ table {
 }
 
 
-td:nth-child(3)
+.scroll
 {
   overflow-x: scroll;
 }
+.bank_style{
+  padding: 2.75rem 6.25rem;
+
+}
+
+.expense_category_style{
+  padding: 2.75rem 6.25rem;
+}
+.store_style{
+  padding: 2.75rem 6.25rem;
+}
+
+@media (max-width: 575px) {
+  .expense_category_style{
+    padding: 2.75rem 0.25rem;
+  }
+  .bank_style{
+    padding: 2.75rem 0.25rem;
+
+  }
+  .store_style{
+    padding: 2.75rem 0.25rem;
+  }
+
+
+}
+

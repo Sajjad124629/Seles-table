@@ -250,7 +250,7 @@
           </div>
         </nav>
         <div class="main-panel">
-            <div class="content-wrapper pb-0">
+            <div class="content-wrapper pb-0 expense_category_style">
 
 
         <!--Expense Section Start---->
@@ -275,36 +275,48 @@
 
                 @csrf
                 @method('put')
-                  <div class="form-group">
-                      <label for="supplier_name">Store Name</label>
-                      <input type="text" class="form-control my-2" name="expense_category_name" placeholder="Enter Expense Category Name" value="{{$getdatas->expense_category_name	}}">
 
+
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Category Name:</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control my-2" name="expense_category_name" placeholder="Enter Expense Category Name" value="{{$getdatas->expense_category_name	}}" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Select Default</label>
+                        <div class="col-sm-9">
+                          <select required class="form-control mt-2" name="is_default">
+                            <option value="" selected="true" disabled="disabled">-----------Select----------</option>
+                            <option @if ($getdatas->is_default==1) selected @endif value="1">Default</option>
+                            <option @if ($getdatas->is_default==0) selected @endif value="0">Not Default</option>
+                        </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Select Action</label>
+                        <div class="col-sm-9">
+                          <select required class="form-control my-2" name="is_active">
+                            <option value="" selected="true" disabled="disabled">-----------Select----------</option>
+                            <option @if ($getdatas->is_active==1) selected @endif value="1">Active</option>
+                            <option @if ($getdatas->is_active==0) selected @endif value="0">Not Active</option>
+                        </select>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
 
-                  <div class="form-group">
-                    <label for="is_active">Select Default</label>
-                    <select class="form-control my-2" name="is_default">
-                        <option selected="true" disabled="disabled">-----------Select----------</option>
-                        <option @if ($getdatas->is_default==1) selected @endif value="1">Default</option>
-                        <option @if ($getdatas->is_default==0) selected @endif value="0">Not Default</option>
-                    </select>
-                    <span class="text-danger"></span>
-                </div>
-
-                  <div class="form-group">
-                      <label for="is_active">Select Status</label>
-                      <select class="form-control my-2" name="is_active">
-                          <option selected="true" disabled="disabled">-----------Select----------</option>
-                          <option @if ($getdatas->is_active==1) selected @endif value="1">Active</option>
-                          <option @if ($getdatas->is_active==0) selected @endif value="0">Not Active</option>
-                      </select>
-                      <span class="text-danger"></span>
-                  </div>
-
-                  <div class="form-group">
+                  <div class="form-group float-right">
                       <button type="submit" class="btn btn-primary mt-2">Submit</button>
-                      <a class="btn btn-primary mt-2 float-right" class="text-light" href="/expense-category-list">Back</a>
+                      <a class="btn btn-primary mt-2" class="text-light" href="/expense-category-list">Back</a>
                   </div>
 
                   <br>

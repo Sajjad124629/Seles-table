@@ -249,7 +249,7 @@
           </div>
         </nav>
         <div class="main-panel">
-            <div class="content-wrapper pb-0">
+            <div class="content-wrapper pb-0 store_style">
         <!--store Section Start---->
 
         <div class="card">
@@ -266,28 +266,37 @@
                 <div class="alert alert-danger">{{session()->get('fail')}}</div>
 
                 @endif
-                
+
                 @csrf
 
-                  <div class="form-group">
-                      <label for="supplier_name">Store Name</label>
-                      <input type="text" class="form-control my-2" name="store_name" placeholder="Enter Store Name" value="">
 
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Store Name:</label>
+                        <div class="col-sm-9">
+                          <input required type="text" class="form-control my-2" name="store_name" placeholder="Enter Store Name" value="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Select Status:</label>
+                        <div class="col-sm-9">
+                          <select  class="form-control my-2" name="is_active" required>
+                            <option value=""  selected="true" disabled="disabled">-----------Select----------</option>
+                            <option value="1">Active</option>
+                            <option value="0">Not Active</option>
+                        </select>
+                        </div>
+                      </div>
+                    </div>
                   </div>
 
-                  <div class="form-group">
-                      <label for="is_active">Select Status</label>
-                      <select class="form-control my-2" name="is_active">
-                          <option selected="true" disabled="disabled">-----------Select----------</option>
-                          <option value="1">Active</option>
-                          <option value="0">Not Active</option>
-                      </select>
-                      <span class="text-danger"></span>
-                  </div>
-
-                  <div class="form-group">
+                  <div class="form-group float-right">
                       <button type="submit" class="btn btn-primary mt-2">Submit</button>
-                      <a class="btn btn-primary mt-2 float-right" class="text-light" href="/store-list">Back</a>
+                      <a class="btn btn-primary mt-2" class="text-light" href="/store-list">Back</a>
                   </div>
 
                   <br>

@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css" />
     <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+
 
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/edit.css">
@@ -251,7 +253,28 @@
         </nav>
 
 
+<!-----Start Toast----->
 
+<div id='toast' class="toast">
+  <div class="toast-content">
+      <i class="icon">
+      </i>
+
+      <div class="menssagem">
+          <span class="text text-1">sucess</span>
+          <span class="text text-2">Salvo com sucesso</span>
+
+      </div>
+  </div>
+  <i class="icon-close">
+      <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+  </i>
+
+  <div class="progress">
+
+  </div>
+</div>
+<!-----End Toast----->
 
 
       <!-- Start Expense Modal -->
@@ -574,6 +597,7 @@
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="assets/vendors/chart.js/Chart.min.js"></script>
     <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <script src="assets/vendors/flot/jquery.flot.js"></script>
@@ -590,6 +614,8 @@
     <!-- endinject -->
     <!-- Custom js for this page -->
     <script src="assets/js/dashboard.js"></script>
+
+
 
     <!-- End custom js for this page -->
 
@@ -622,7 +648,7 @@
                     '<tr>\
                                   <td>'+(key+1)+'</td>\
                                   <td>'+item.expense_name+'</td>\
-                                  <td>'+item.notes+'</td>\
+                                  <td class="scroll">'+item.notes+'</td>\
                                   <td style="text-align: end;">'+item.amount+'</td>\
                                   <td style="display:flex;justify-content:center;"><button value="'+item.expense_details_id+'" id="edit_expense" class="btn mr-2 btn-dark btn-sm btn-icon-text" class="text-light"><i class="mdi mdi-tooltip-edit"></i> </button><button value="'+item.expense_details_id+'" id="delete_expense" class="btn btn-warning btn-sm btn-icon-text" class="text-light" ><i class="mdi mdi-delete"></i></button></td>\
                                 </tr>'
@@ -680,23 +706,25 @@
               dataType: "json",
               success: function (response) {
                 if(response.status==400){
-                                $('#show_message_error').html('');
-                                $('#show_message_error').addClass('alert alert-danger');
-                                $('#show_message_error').text(response.errors);
+                                // $('#show_message_error').html('');
+                                // $('#show_message_error').addClass('alert alert-danger');
+                                // $('#show_message_error').text(response.errors);
                                 $('#editExpense').modal('hide');
-                                $("#show_message_error").show().delay(3000).queue(function(n) {
-                                      $(this).hide(); n();
-                                    });
-
+                                // $("#show_message_error").show().delay(3000).queue(function(n) {
+                                //       $(this).hide(); n();
+                                //     });
+                                swal("Error",response.errors, "error");
 
                   }
                   else{
-                    $('#show_message_success').addClass('alert alert-success');
-                    $('#show_message_success').text(response.success);
+                    // $('#show_message_success').addClass('alert alert-success');
+                    // $('#show_message_success').text(response.success);
+
+                    // $("#show_message_success").show().delay(3000).queue(function(n) {
+                    //                   $(this).hide(); n();
+                    //                 });
                     $('#editExpense').modal('hide');
-                    $("#show_message_success").show().delay(3000).queue(function(n) {
-                                      $(this).hide(); n();
-                                    });
+                    swal("Good job!",response.success, "success");
                     $('#expense').val(''),
                     $('#amount').val(''),
                     $('#notes').val('');
@@ -730,23 +758,28 @@
               dataType: "json",
               success: function (response) {
                   if(response.status==400){
-                                $('#show_message_error').html('');
-                                $('#show_message_error').addClass('alert alert-danger');
-                                $('#show_message_error').text(response.errors);
-                                $("#show_message_error").show().delay(3000).queue(function(n) {
-                                      $(this).hide(); n();
-                                    });
+
+                        swal("Error",response.errors, "error");
+                                // $('#show_message_error').html('');
+                                // $('#show_message_error').addClass('alert alert-danger');
+                                // $('#show_message_error').text(response.errors);
+                                // $("#show_message_error").show().delay(3000).queue(function(n) {
+                                //       $(this).hide(); n();
+                                //     });
 
                                 // $('#expense').val(''),
                                 // $('#amount').val(''),
                                 // $('#employee').val('');
                   }
                   else{
-                    $('#show_message_success').addClass('alert alert-success');
-                    $('#show_message_success').text(response.success);
-                    $("#show_message_success").show().delay(3000).queue(function(n) {
-                                      $(this).hide(); n();
-                                    });
+                    // $('#show_message_success').addClass('alert alert-success');
+                    // $('#show_message_success').text(response.success);
+                    // $("#show_message_success").show().delay(3000).queue(function(n) {
+                    //                   $(this).hide(); n();
+                    //                 });
+
+                    swal("Good job!",response.success, "success");
+
                     $('#expense').val(''),
                     $('#amount').val(''),
                     $('#notes').val('');
@@ -773,13 +806,13 @@
                 url: "/delete-expense/"+expense_details_id,
                 success: function (response) {
                     if(response.status==200){
-                                $('#show_message_error').html('');
-                                $('#show_message_error').addClass('alert alert-danger');
-                                $('#show_message_error').text(response.delete);
-                                $("#show_message_error").show().delay(3000).queue(function(n) {
-                                      $(this).hide(); n();
-                                    });
-
+                                // $('#show_message_error').html('');
+                                // $('#show_message_error').addClass('alert alert-danger');
+                                // $('#show_message_error').text(response.delete);
+                                // $("#show_message_error").show().delay(3000).queue(function(n) {
+                                //       $(this).hide(); n();
+                                //     });
+                                swal("Good job!",response.delete, "success");
                                 getdata() //call expenses function
 
                     }
