@@ -268,7 +268,7 @@
             <form action="" method="GET">
               <div class="input-group input-navbar">
 
-                <input type="text" name="search_email" class="form-control" placeholder="Enter Email" aria-label="Username" aria-describedby="icon-addon1">
+                <input type="text" name="search_email" class="form-control col-lg-12" placeholder="Enter Email" aria-label="Username" aria-describedby="icon-addon1">
                 <input type="text" name="search_first_name" class="form-control" placeholder="Enter First Name" aria-label="Username" aria-describedby="icon-addon1">
                 <input type="text" name="search_last_name" class="form-control" placeholder="Enter Last Name" aria-label="Username" aria-describedby="icon-addon1">
                 <input type="text" name="search_company_name" class="form-control" placeholder="Enter Company Name" aria-label="Username" aria-describedby="icon-addon1">
@@ -277,37 +277,21 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
               </div>
 
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group mt-4 mb-4" style="max-width: 60%;">
 
+                        <input type="date" name="date_start" class="form-control mr-4" placeholder="Enter Date" aria-label="Username" aria-describedby="icon-addon1">
+                        <input type="date" name="date_end" class="form-control" placeholder="Enter Date" aria-label="Username" aria-describedby="icon-addon1">
+                        <label class="mt-2 ml-2" for="">Date Range</label>
+                    </div>
+                </div>
+              </div>
 
             </form>
 
 
-            <div class="container m-4">
-                <div class="row">
-                    <div class="col-4">
-                        <!--		Show Numbers Of Rows 		-->
-              <select class="form-control form-select" aria-label="Default select example" name="state" id="maxRows">
-                  <option value="5000">Show ALL Rows</option>
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="15">15</option>
-                  <option value="20">20</option>
-                  <option value="50">50</option>
-                  <option value="70">70</option>
-                  <option value="100">100</option>
-              </select>
 
-          </div>
-                    <div class="col-4">
-                        <input type="text" name=""  class="form-control" id="input_search" placeholder="Enter Search" aria-label="Username" aria-describedby="icon-addon1">
-
-                    </div>
-                    <div class="col-4">
-                        <a href="/genarate-pdf" class="btn btn-primary">Export PDf</a>
-                    </div>
-
-                </div>
-            </div>
 
 
 
@@ -355,23 +339,7 @@
             </table>
 
 
-<!--		Start Pagination -->
-<div class='pagination-container'>
-    <nav>
-      <ul class="pagination">
 
-        <li data-page="prev" class="btn btn-primary">
-          <span>
-            < <span class="sr-only">(current)
-          </span></span>
-        </li>
-        <!--	Here the JS Function Will Add the Rows -->
-        <li data-page="next" id="prev" class="btn btn-primary">
-          <span> > <span class="sr-only">(current)</span></span>
-        </li>
-      </ul>
-    </nav>
-  </div>
 
 
 
@@ -413,26 +381,21 @@
     <!-- Custom js for this page -->
     <script src="assets/js/dashboard.js"></script>
     <!-- End custom js for this page -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="js/vendor/jquery.sortelements.js" type="text/javascript"></script>
+    <script src="js/jquery.bdt.min.js" type="text/javascript"></script>
+
 
     <script>
         $(document).ready(function () {
 
-            $('#input_search').keyup(function () {
-                var get_search_data = $(this).val().toLowerCase();
-                $('#tablebody tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(get_search_data)>-1)
-                 });
-            });
 
          })
     </script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="js/vendor/jquery.sortelements.js" type="text/javascript"></script>
-<script src="js/jquery.bdt.min.js" type="text/javascript"></script>
-<script src="simplepagination.js"></script>
+
 
 
 

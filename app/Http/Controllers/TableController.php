@@ -21,6 +21,11 @@ class TableController extends Controller
     $search5 = request()->query("search_date");
     $search6 = request()->query("search_country");
 
+    //date range
+
+        $dateRangeStart = request()->query('date_start');
+        $dateRangeEnd = request()->query('date_end');
+
     // if($search and $search2==""){
     //     $search_data = sales::where('first','Like',"%{$search}%")->paginate(10);
     //     // $search_data2 = sales::where('last','Like',"%{$search}%")->paginate(10);
@@ -62,6 +67,9 @@ class TableController extends Controller
     elseif($search6){
         $search_data = sales::where('country','Like',"%{$search6}%")->get();
     }
+    elseif($dateRangeStart or $dateRangeEnd){
+            $search_data = sales::whereBetween('created_at', [$dateRangeStart, $dateRangeEnd])->get();
+    }
     else{
         $search_data = sales::all();
     }
@@ -82,9 +90,7 @@ class TableController extends Controller
     $pdf = Pdf::loadView('pdf.table',["getdata"=>$res,]);
     return $pdf->download('info.pdf');
    }
-   public function download_pdf(){
 
-   }
 
 }
 
