@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ReportsExport;
 use App\Models\Expense;
+use App\Models\ExpenseCategory;
 use App\Models\ExpenseDetail;
 use Illuminate\Support\Facades\Validator;
 use App\Models\sales;
@@ -49,8 +50,11 @@ class PurchaseController extends Controller
 
     public function expense(){
 
+        $getdata = ExpenseCategory::all();
 
-        return view('purchase.expense');
+
+
+        return view('purchase.expense',['expenseCategory'=>$getdata]);
 
     }
 
@@ -60,6 +64,7 @@ class PurchaseController extends Controller
             'date'=>'required',
             'expense'=>'required',
             'notes'=>'required',
+            'expense_category_id'=>'required',
             'amount'=>'required|numeric|min:0',
         ]);
 
@@ -78,8 +83,10 @@ class PurchaseController extends Controller
         }
 
         else{
+
             $get_expense = new Expense;
             $get_expense->expense_name = $request->expense;
+            $get_expense->expense_category_id = $request->expense_category_id;
             $get_expense->save();
 
             $get_details = new ExpenseDetail;
@@ -102,14 +109,19 @@ class PurchaseController extends Controller
     public function getdata(){
         $getdata = DB::table('expense_details')
         ->join('expenses', 'expense_details.expense_id', '=', 'expenses.expense_id')
-        ->select('expense_details.expense_details_id','expense_details.date', 'expense_details.amount', 'expense_details.notes', 'expenses.expense_name')
+        ->join('expense_categories', 'expenses.expense_category_id', '=', 'expense_categories.expense_category_id')
+        ->select('expense_details.expense_details_id','expense_details.date', 'expense_details.amount', 'expense_details.notes', 'expenses.expense_name','expense_categories.expense_category_name')
         ->get();
+
 
         $getsub_expense = ExpenseDetail::get()->sum('amount');
 
+
+
         return response()->json([
             'expense'=>$getdata,
-            'amount'=>$getsub_expense
+            'amount'=>$getsub_expense,
+
         ]);
 
     }
@@ -185,6 +197,9 @@ class PurchaseController extends Controller
             'delete' => 'Expense Delete Successfully'
         ]);
     }
+
+
+
 
 
 }
