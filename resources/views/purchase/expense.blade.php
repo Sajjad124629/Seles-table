@@ -144,8 +144,8 @@
                 <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
                     <a class="navbar-brand brand-logo-mini align-self-center d-lg-none" href="index.html"><img
                             src="assets/images/logo-mini.svg" alt="logo" /></a>
-                    <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button"
-                        data-toggle="minimize">
+                    <button class="minimize navbar-toggler navbar-toggler align-self-center mr-2" type="button"
+                    data-toggle="minimize">
                         <i class="mdi mdi-menu"></i>
                     </button>
                     <ul class="navbar-nav">
@@ -712,6 +712,7 @@
                 }
             });
 
+          
 
 
 
@@ -745,14 +746,33 @@
                                 $('#expense_tbody').append(
 
                                     '<tr>\
-                                              <td>' + (key + 1) + '</td>\
-                                              <td>' + item.expense_category_name + '</td>\
-                                              <td>' + item.expense_name + '</td>\
-                                              <td style="overflow-x:scroll; max-width:200px;">' + item.notes + '</td>\
-                                              <td style="text-align: end;">' + item.amount + '</td>\
-                                              <td style="text-align: end;">' + item.date + '</td>\
-                                              <td style="display:flex;justify-content:center;"><button value="' + item.expense_details_id +'" id="edit_expense" class="btn mr-2 btn-dark btn-sm btn-icon-text" class="text-light"><i class="mdi mdi-tooltip-edit"></i> </button><button hidden value="' +item.expense_details_id + '" id="delete_expense" class="btn btn-warning btn-sm btn-icon-text" class="text-light" ><i class="mdi mdi-delete"></i></button></td>\
-                                            </tr>'
+                                                                                                                  <td>' + (
+                                        key +
+                                        1) + '</td>\
+                                                                                                                  <td>' +
+                                    item
+                                    .expense_category_name + '</td>\
+                                                                                                                  <td>' +
+                                    item
+                                    .expense_name +
+                                    '</td>\
+                                                                                                                  <td style="overflow-x:scroll; max-width:200px;">' +
+                                    item
+                                    .notes +
+                                    '</td>\
+                                                                                                                  <td style="text-align: end;">' +
+                                    item
+                                    .amount +
+                                    '</td>\
+                                                                                                                  <td style="text-align: end;">' +
+                                    item
+                                    .date +
+                                    '</td>\
+                                                                                                                  <td style="display:flex;justify-content:center;"><button value="' +
+                                    item.expense_details_id +
+                                    '" id="edit_expense" class="btn mr-2 btn-dark btn-sm btn-icon-text" class="text-light"><i class="mdi mdi-tooltip-edit"></i> </button><button hidden value="' +
+                                    item.expense_details_id + '" id="delete_expense" class="btn btn-warning btn-sm btn-icon-text" class="text-light" ><i class="mdi mdi-delete"></i></button></td>\
+                                                                                                                </tr>'
                                 );
                             }
                         });
@@ -781,8 +801,6 @@
                             $('#edit_amount').val(response.expenseDetails.amount);
                             $('#expenseDetailsId').val(response.expenseDetails
                                 .expense_details_id)
-
-
                         }
                     }
                 });

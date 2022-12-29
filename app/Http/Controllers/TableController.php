@@ -21,6 +21,9 @@ class TableController extends Controller
     $search5 = request()->query("search_date");
     $search6 = request()->query("search_country");
 
+    // $search9 = request()->query("firstName");
+    // $search10 = request()->query("lastName");
+
     //date range
 
         $dateRangeStart = request()->query('date_start');
@@ -46,10 +49,19 @@ class TableController extends Controller
 
 
 
-
+    // or $search3 or $search4 or $search5 or $search6
 
     // }
-    if($search){
+    if($search and $search2 and $search3 and $search4 and $search5 and $search6){
+        $search_data = sales::where('email','Like',"%{$search}%")
+        ->orWhere('first', 'Like', "%{$search2}%")
+        ->orWhere('last', 'Like', "%{$search3}%")
+        ->orWhere('company', 'Like', "%{$search4}%")
+        ->orWhere('created_at', 'Like', "%{$search5}%")
+        ->orWhere('country', 'Like', "%{$search6}%")
+        ->get();
+    }
+    elseif($search){
         $search_data = sales::where('email','Like',"%{$search}%")->get();
     }
     elseif($search2){
@@ -70,6 +82,9 @@ class TableController extends Controller
     elseif($dateRangeStart or $dateRangeEnd){
             $search_data = sales::whereBetween('created_at', [$dateRangeStart, $dateRangeEnd])->get();
     }
+    // elseif($search9 or $search10){
+    //         $search_data = sales::where('first', 'Like', "%{$search9}%")->orWhere('last', 'Like', "%{$search10}%")->get();
+    // }
     else{
         $search_data = sales::all();
     }

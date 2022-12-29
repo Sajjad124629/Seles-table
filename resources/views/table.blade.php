@@ -290,7 +290,15 @@
 
             </form>
 
-
+            {{-- <form action="" method="GET">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <input type="text" name="firstName" class="form-control" placeholder="Enter First Name" aria-label="Username" aria-describedby="icon-addon1">
+                        <input type="text" name="lastName" class="form-control" placeholder="Enter Last Name" aria-label="Username" aria-describedby="icon-addon1">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form> --}}
 
 
 
