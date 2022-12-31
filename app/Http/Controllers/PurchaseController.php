@@ -113,14 +113,9 @@ class PurchaseController extends Controller
         ->select('expense_details.expense_details_id','expense_details.date', 'expense_details.amount', 'expense_details.notes', 'expenses.expense_name','expense_categories.expense_category_name')
         ->get();
 
-
-        $getsub_expense = ExpenseDetail::get()->sum('amount');
-
-
-
         return response()->json([
             'expense'=>$getdata,
-            'amount'=>$getsub_expense,
+
 
         ]);
 
@@ -133,10 +128,13 @@ class PurchaseController extends Controller
 
         $getExpense = Expense::find($getExpenseDetails->expense_id);
 
+        $getExpenseCategory = ExpenseCategory::find($getExpense->expense_category_id);
+
         return response()->json([
             'status' => 200,
             'expenseDetails' => $getExpenseDetails,
-            'expense' => $getExpense
+            'expense' => $getExpense,
+            'expenseCategory'=>$getExpenseCategory
         ]);
     }
 
@@ -146,6 +144,7 @@ class PurchaseController extends Controller
             'expense'=>'required',
             'notes'=>'required',
             'amount'=>'required|numeric|min:0',
+
         ]);
 
         if($request->amount<0){
@@ -165,7 +164,9 @@ class PurchaseController extends Controller
             $getExpenseDetails = ExpenseDetail::find($id);
 
             $getExpenseData = Expense::find($getExpenseDetails->expense_id);
-
+            $getExpenseCategory = ExpenseCategory::find($getExpenseData->expense_category_id);
+            $getExpenseCategory->expense_category_name = $request->edit_expense_category;
+            $getExpenseCategory->save();
             $getExpenseData->expense_name = $request->expense;
             $getExpenseData->save();
 
@@ -199,6 +200,31 @@ class PurchaseController extends Controller
     }
 
 
+
+
+    //*************************Full Expense List
+
+
+    public function ExpenseList(Request $request)
+    {
+        // if ($request->ajax()) {
+        //     $data = Ajax::all();
+        //     return DataTables::of($data)
+        //         ->addIndexColumn()
+        //         ->addColumn('action', function ($row) {
+
+        //             $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+
+        //             $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+
+        //             return $btn;
+        //         })
+        //         ->rawColumns(['action'])
+        //         ->make(true);
+
+        // }
+        return view('purchase.allExpenseList');
+    }
 
 
 

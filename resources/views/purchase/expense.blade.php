@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css" />
     <link rel="stylesheet" href="assets/vendors/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" />
+        {{-- Include This --}}
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
@@ -278,33 +280,6 @@
             </nav>
 
 
-            <!-----Start Toast----->
-
-            <div id='toast' class="toast">
-                <div class="toast-content">
-                    <i class="icon">
-                    </i>
-
-                    <div class="menssagem">
-                        <span class="text text-1">sucess</span>
-                        <span class="text text-2">Salvo com sucesso</span>
-
-                    </div>
-                </div>
-                <i class="icon-close">
-                    <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"
-                        stroke-linecap="round" stroke-linejoin="round" height="1em" width="1em"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </i>
-
-                <div class="progress">
-
-                </div>
-            </div>
-            <!-----End Toast----->
 
 
             <!-- Start Expense Modal -->
@@ -320,24 +295,29 @@
                         <input type="text" id="expenseDetailsId" hidden>
                         <div class="modal-body">
                             <div class="form-group">
+                                <label for="exampleInputUsername1">Expense Category:</label>
+                                <input type="text" placeholder="Expense Category" name="edit_expense_category"
+                                    id="edit_expense_category" class="form-control">
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputUsername1">Particulars:</label>
                                 <input type="text" placeholder="Expense Name" name="edit_expense"
                                     id="edit_expense" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputUsername1">Notes:</label>
-                                <input type="text" value="" name="edit_notes" id="edit_notes"
-                                    class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputUsername1">Amount:</label>
                                 <input type="number" name="edit_amount" id="edit_amount" value=""
                                     class="form-control" placeholder="Enter Amount">
                             </div>
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Notes:</label>
+                                <textarea type="text" value="" name="edit_notes" id="edit_notes"
+                                    class="form-control"></textarea>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" id="update_expense" class="btn btn-primary">Save changes</button>
+                            <button type="button" id="update_expense" class="btn btn-primary">Update Expense</button>
                         </div>
                     </div>
                 </div>
@@ -667,21 +647,19 @@
     <script src="assets/vendors/js/vendor.bundle.base.js"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-        integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-    </script>
 
+
+
+
+     {{-- Include This --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
     </script>
 
+
+
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="assets/vendors/chart.js/Chart.min.js"></script>
     <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
@@ -712,8 +690,6 @@
                 }
             });
 
-          
-
 
 
 
@@ -727,7 +703,9 @@
                     url: "/fetch-expense",
                     dataType: "json",
                     success: function(response) {
-                        $('#sum_amount').text(response.amount);
+
+                      //   $('#sum_amount').text(response.amount);
+
                         $('#expense_tbody').html('');
                         const date = new Date();
 
@@ -739,44 +717,29 @@
                         let currentDate = `${year}-${month}-${day}`;
 
 
-
+                        var i=1
+                        var total = 0;
                         $.each(response.expense, function(key, item) {
 
                             if (currentDate == item.date) {
                                 $('#expense_tbody').append(
 
                                     '<tr>\
-                                                                                                                  <td>' + (
-                                        key +
-                                        1) + '</td>\
-                                                                                                                  <td>' +
-                                    item
-                                    .expense_category_name + '</td>\
-                                                                                                                  <td>' +
-                                    item
-                                    .expense_name +
-                                    '</td>\
-                                                                                                                  <td style="overflow-x:scroll; max-width:200px;">' +
-                                    item
-                                    .notes +
-                                    '</td>\
-                                                                                                                  <td style="text-align: end;">' +
-                                    item
-                                    .amount +
-                                    '</td>\
-                                                                                                                  <td style="text-align: end;">' +
-                                    item
-                                    .date +
-                                    '</td>\
-                                                                                                                  <td style="display:flex;justify-content:center;"><button value="' +
-                                    item.expense_details_id +
-                                    '" id="edit_expense" class="btn mr-2 btn-dark btn-sm btn-icon-text" class="text-light"><i class="mdi mdi-tooltip-edit"></i> </button><button hidden value="' +
-                                    item.expense_details_id + '" id="delete_expense" class="btn btn-warning btn-sm btn-icon-text" class="text-light" ><i class="mdi mdi-delete"></i></button></td>\
-                                                                                                                </tr>'
+                                        <td>'+i+'</td>\
+                                        <td>' +item.expense_category_name + '</td>\
+                                        <td>' +item.expense_name +'</td>\
+                                        <td style="overflow-x:scroll; max-width:200px;">' +item.notes +'</td>\
+                                        <td class="numeric" style="text-align: end;">' +item.amount +'</td>\
+                                        <td style="display:flex;justify-content:center;"><button value="' +item.expense_details_id +'" id="edit_expense" class="btn mr-2 btn-dark btn-sm btn-icon-text" class="text-light"><i class="mdi mdi-tooltip-edit"></i> </button><button hidden value="' +item.expense_details_id + '" id="delete_expense" class="btn btn-warning btn-sm btn-icon-text" class="text-light" ><i class="mdi mdi-delete"></i></button></td>\
+                                    </tr>'
+
                                 );
+                                i++;
+                                total = total+item.amount
                             }
                         });
-
+                        $('#sum_amount').text(total);
+                        // console.log(total);
                     }
                 });
             }
@@ -800,7 +763,8 @@
                             $('#edit_expense').val(response.expense.expense_name);
                             $('#edit_amount').val(response.expenseDetails.amount);
                             $('#expenseDetailsId').val(response.expenseDetails
-                                .expense_details_id)
+                                .expense_details_id);
+                            $('#edit_expense_category').val(response.expenseCategory.expense_category_name);
                         }
                     }
                 });
@@ -817,6 +781,7 @@
                     'expense': $('#edit_expense').val(),
                     'notes': $('#edit_notes').val(),
                     'amount': $('#edit_amount').val(),
+                    'edit_expense_category': $('#edit_expense_category').val(),
                 }
 
                 // console.log(data);

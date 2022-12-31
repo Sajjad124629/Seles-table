@@ -104,3 +104,11 @@ Route::get('/add-bank', [BankController::class, 'add_bank']);
 Route::post('/insert-bank', [BankController::class, 'insert_bank']);
 Route::get('/edit-bank/{id}', [BankController::class, 'edit_bank']);
 Route::put('/update-bank/{id}', [BankController::class, 'update_bank']);
+
+
+
+
+//all expense List
+
+
+Route::get('/Expense-Full-List', [PurchaseController::class, 'ExpenseList']);
