@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Breeze Admin</title>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="assets/vendors/flag-icon-css/css/flag-icon.min.css" />
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css" />
@@ -253,117 +253,87 @@
             <div class="content-wrapper pb-0">
         <!--Expense Full LIst Section Start---->
 
+
+
+       <!--Update Expense Modal -->
+
+<div class="modal fade" id="updateExpense" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modaltitle">Update Category</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="productForm" name="productForm" class="form-horizontal">
+          <div class="form-group">
+
+              <input type="text" hidden class="form-control"  id="getID" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="name">Expense Category</label>
+            <select class="form-control" name="update_expense_category" id="update_expense_category">
+                <option selected disabled>-------Select------</option>
+                @foreach ($getdata as $getdata)
+
+
+                <option value="{{$getdata->expense_category_name}}">{{$getdata->expense_category_name}}</option>
+
+                @endforeach
+              </select>
+          </div>
+          <div class="form-group">
+            <label for="name">Perticulars</label>
+            <input type="text" class="form-control" name="" id="update_expense" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="name">Amount</label>
+            <input type="text" class="form-control" name="" id="update_amount" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label for="name">Amount</label>
+            <textarea type="text" class="form-control" name="" id="update_notes" placeholder="Name"></textarea>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="Update">Update Expense</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+      <!--End Update Expense Modal -->
+
                 <div class="row">
                     <div class="col-lg-12 grid-margin stretch-card">
                         <div class="card">
                           <div class="card-body">
-                            <h4 class="card-title">Striped Table</h4>
-                            <p class="card-description"> Add class <code>.table-striped</code>
-                            </p>
+                            <h4 class="card-title mb-3">Full Expense Table List</h4>
                             <div class="table-responsive">
-                              <table id="myTable" class="table table-striped">
+                              <table id="myTable" class="table scroll table-striped">
                                 <thead>
                                   <tr>
-                                    <th>User</th>
-                                    <th>First name</th>
-                                    <th>Progress</th>
-                                    <th>Amount</th>
-                                    <th>Deadline</th>
+                                    <th>S.N</th>
+                                    <th>Expense Category</th>
+                                    <th>Particulars</th>
+                                    <th>Notes</th>
+                                    <th class="text-right">Amount</th>
+                                    <th class="text-center">Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr>
-                                    <td class="py-1">
-                                      <img src="../../assets/images/faces-clipart/pic-1.png" alt="image">
-                                    </td>
-                                    <td>Herman Beck</td>
-                                    <td>
-                                      <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
-                                    </td>
-                                    <td>$ 77.99</td>
-                                    <td>May 15, 2015</td>
-                                  </tr>
-                                  <tr>
-                                    <td class="py-1">
-                                      <img src="../../assets/images/faces-clipart/pic-2.png" alt="image">
-                                    </td>
-                                    <td>Messsy Adam</td>
-                                    <td>
-                                      <div class="progress">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
-                                    </td>
-                                    <td>$245.30</td>
-                                    <td>July 1, 2015</td>
-                                  </tr>
-                                  <tr>
-                                    <td class="py-1">
-                                      <img src="../../assets/images/faces-clipart/pic-3.png" alt="image">
-                                    </td>
-                                    <td>John Richards</td>
-                                    <td>
-                                      <div class="progress">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
-                                    </td>
-                                    <td>$138.00</td>
-                                    <td>Apr 12, 2015</td>
-                                  </tr>
-                                  <tr>
-                                    <td class="py-1">
-                                      <img src="../../assets/images/faces-clipart/pic-4.png" alt="image">
-                                    </td>
-                                    <td>Peter Meggik</td>
-                                    <td>
-                                      <div class="progress">
-                                        <div class="progress-bar bg-primary" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
-                                    </td>
-                                    <td>$ 77.99</td>
-                                    <td>May 15, 2015</td>
-                                  </tr>
-                                  <tr>
-                                    <td class="py-1">
-                                      <img src="../../assets/images/faces-clipart/pic-1.png" alt="image">
-                                    </td>
-                                    <td>Edward</td>
-                                    <td>
-                                      <div class="progress">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 35%;" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
-                                    </td>
-                                    <td>$ 160.25</td>
-                                    <td>May 03, 2015</td>
-                                  </tr>
-                                  <tr>
-                                    <td class="py-1">
-                                      <img src="../../assets/images/faces-clipart/pic-2.png" alt="image">
-                                    </td>
-                                    <td>John Doe</td>
-                                    <td>
-                                      <div class="progress">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
-                                    </td>
-                                    <td>$ 123.21</td>
-                                    <td>April 05, 2015</td>
-                                  </tr>
-                                  <tr>
-                                    <td class="py-1">
-                                      <img src="../../assets/images/faces-clipart/pic-3.png" alt="image">
-                                    </td>
-                                    <td>Henry Tom</td>
-                                    <td>
-                                      <div class="progress">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                      </div>
-                                    </td>
-                                    <td>$ 150.00</td>
-                                    <td>June 16, 2015</td>
-                                  </tr>
                                 </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4">Total</td>
+                                        <td class="text-right" id="sum_amount"></td>
+                                    </tr>
+                                </tfoot>
                               </table>
                             </div>
                           </div>
@@ -401,8 +371,10 @@
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="//cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="assets/vendors/chart.js/Chart.min.js"></script>
     <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <script src="assets/vendors/flot/jquery.flot.js"></script>
@@ -412,6 +384,7 @@
     <script src="assets/vendors/flot/jquery.flot.stack.js"></script>
     <script src="assets/vendors/flot/jquery.flot.pie.js"></script>
     <!-- End plugin js for this page -->
+
     <!-- inject:js -->
     <script src="assets/js/off-canvas.js"></script>
     <script src="assets/js/hoverable-collapse.js"></script>
@@ -423,14 +396,120 @@
     <!-- End custom js for this page -->
 
 <script>
-        $(document).ready( function () {
-        $('#myTable').DataTable();
+ $(document).ready( function () {
+       //csrf token
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+
+
+     //data table
+
+     var table = $('#myTable').DataTable({
+        stateSave: true,
+        processing: true,
+        serverSide: true,
+        ajax: "/Expense-Full-List",
+        columns: [
+            { data: 'DT_RowIndex', name: 'DT_RowIndex' },
+            { data: 'expense_category_name', name: 'expense_category_name' },
+            { data: 'expense_name', name: 'expense_name'},
+            { data: 'notes', name: 'notes'},
+            { data: 'amount', name: 'amount'},
+            { data: 'action', name: 'action', orderable: false, searchable: false },
+        ]
+    });
+
+ //edit Data
+
+    $(document).on('click', '.edit', function () {
+        var getdata = $(this).data('id');
+
+        $('#updateExpense').modal('show');
+
+
+        // console.log(getdata);
+        $.ajax({
+            type: "GET",
+            url: "/Expense-featch-data/" + getdata,
+            dataType: "json",
+            success: function (response) {
+                if (response.status == 200) {
+                    $('#update_expense_category').val(response.expenseCategory.expense_category_name);
+                    $('#update_expense').val(response.expense.expense_name);
+                    $('#update_amount').val(response.expenseDetails.amount);
+                    $('#update_notes').val(response.expenseDetails.notes);
+
+                    $('#getID').val(response.expenseDetails.expense_details_id );
+
+                    // console.log(response.expenseDetails.expense_details_id );
+                }
+            }
+        });
+    });
+
+     //update List
+
+
+     $(document).on('click', '#Update', function (event) {
+
+event.preventDefault();
+var data = {
+    'update_expense_category':$('#update_expense_category').val(),
+    'update_expense':  $('#update_expense').val(),
+    'update_amount':   $('#update_amount').val(),
+    'update_notes': $('#update_notes').val(),
+}
+
+var getdataId = $('#getID').val();
+// console.log(getdataId);
+// console.log(data);
+$.ajax({
+    type: "PUT",
+    url: "/update-full-expense/" + getdataId,
+    data: data,
+    dataType: "json",
+    success: function (response) {
+        if (response.status == 400) {
+            $('#updateExpense').modal('hide');
+            swal("Error", response.errors, "error");
+        }
+        else {
+
+            $('#updateExpense').modal('hide');
+            swal("Good job!", response.success, "success");
+            table.ajax.reload(null, false);//for reload dataTable
+        }
+    }
+});
+});
+
+
+
+//Delete List
+
+$(document).on('click', '.deleteProduct', function () {
+        var getdata = $(this).data('id');
+        // console.log(getdata);
+
+        $.ajax({
+            type: "GET",
+            url: "/delete-full-expense/" + getdata,
+            success: function (response) {
+                swal("Good job!", response.delete, "success");
+                table.ajax.reload(null, false);//for reload dataTable
+            }
+        });
+    });
+
     } );
 
 </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
 
 
   </body>

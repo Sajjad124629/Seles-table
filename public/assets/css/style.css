@@ -15557,9 +15557,18 @@ table {
 }
 
 
-.scroll
+.scroll tbody td:nth-child(4)
 {
   overflow-x: scroll;
+  width: 150px;
+}
+.scroll tbody td:nth-child(5)
+{
+  text-align: end;
+}
+.scroll tbody td:nth-child(6)
+{
+  text-align: center;
 }
 .bank_style{
   padding: 2.75rem 6.25rem;

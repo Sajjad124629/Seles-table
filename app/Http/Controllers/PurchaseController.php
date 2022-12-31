@@ -12,6 +12,7 @@ use App\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Yajra\DataTables\Facades\DataTables;
 
 class PurchaseController extends Controller
 {
@@ -205,27 +206,122 @@ class PurchaseController extends Controller
     //*************************Full Expense List
 
 
+
+
     public function ExpenseList(Request $request)
+
+
     {
-        // if ($request->ajax()) {
-        //     $data = Ajax::all();
-        //     return DataTables::of($data)
-        //         ->addIndexColumn()
-        //         ->addColumn('action', function ($row) {
 
-        //             $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
+        if ($request->ajax()) {
+            $data = ExpenseDetail::
+            join('expenses', 'expense_details.expense_id', '=', 'expenses.expense_id')
+            ->join('expense_categories', 'expenses.expense_category_id', '=', 'expense_categories.expense_category_id')
+            ->select('expense_details.*','expense_details.date', 'expense_details.amount', 'expense_details.notes', 'expenses.expense_name','expense_categories.expense_category_name')
+            ->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
 
-        //             $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->id . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
+                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->expense_details_id  . '" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct"><i class="mdi mdi-tooltip-edit"></i></a>';
 
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action'])
-        //         ->make(true);
+                    $btn = $btn . ' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="' . $row->expense_details_id  . '" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct"><i class="mdi mdi-delete"></i></a>';
 
-        // }
-        return view('purchase.allExpenseList');
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+        $getdata = ExpenseCategory::all();
+
+        return view('purchase.allExpenseList',['getdata'=>$getdata]);
+    }
+    // public function totalExpenseAmount(){
+    //     $getdata = ExpenseDetail::sum('amount');
+    //     return response()->json([
+    //         'getdata' => $getdata
+    //     ]);
+    // }
+
+    public function Expense_featch_data($id){
+        $getExpenseDetails = ExpenseDetail::find($id);
+
+
+
+        $getExpense = Expense::find($getExpenseDetails->expense_id);
+
+        $getExpenseCategory = ExpenseCategory::find($getExpense->expense_category_id);
+
+        return response()->json([
+            'status' => 200,
+            'expenseDetails' => $getExpenseDetails,
+            'expense' => $getExpense,
+            'expenseCategory'=>$getExpenseCategory
+        ]);
     }
 
 
+    public function update_full_expense(Request $request,$id){
+        $validator = Validator::make($request->all(), [
+
+            'update_expense_category'=>'required',
+            'update_expense'=>'required',
+            'update_notes'=>'required',
+            'update_amount'=>'required|numeric|min:0',
+
+        ]);
+
+        if($request->update_amount<0){
+            return response()->json([
+                'status'=>400,
+                'errors'=>'Amount Section must be positive'
+            ]);
+        }
+
+        if($validator->fails()){
+            return response()->json([
+                'status'=>400,
+                'errors'=>'Update Fail Fill All Section'
+            ]);
+        }
+        else{
+            $getExpenseDetails = ExpenseDetail::find($id);
+
+            $getExpenseData = Expense::find($getExpenseDetails->expense_id);
+            $getExpenseCategory = ExpenseCategory::find($getExpenseData->expense_category_id);
+            $getExpenseCategory->expense_category_name = $request->update_expense_category;
+            $getExpenseCategory->save();
+            $getExpenseData->expense_name = $request->update_expense;
+            $getExpenseData->save();
+
+            $getExpenseDetails->amount = $request->update_amount;
+            $getExpenseDetails->notes = $request->update_notes;
+
+            $getExpenseDetails->save();
+
+            return response()->json([
+                'status'=>200,
+                'success'=>'Expense Update Successfully'
+            ]);
+        }
+    }
+
+    public function delete_full_expense($id){
+        $getExpenseDetails = ExpenseDetail::find($id);
+
+        $getExpenseData = Expense::find($getExpenseDetails->expense_id);
+        $getExpenseCategory = ExpenseCategory::find($getExpenseData->expense_category_id);
+
+        $getExpenseCategory->delete();
+        $getExpenseData->delete();
+
+        $getExpenseDetails->delete();
+
+        return response()->json([
+            'status' => 200,
+            'delete' => 'Expense Delete Successfully'
+        ]);
+    }
 
 }

@@ -112,3 +112,8 @@ Route::put('/update-bank/{id}', [BankController::class, 'update_bank']);
 
 
 Route::get('/Expense-Full-List', [PurchaseController::class, 'ExpenseList']);
+
+
+Route::get('/Expense-featch-data/{id}', [PurchaseController::class, 'Expense_featch_data']);
+Route::put('/update-full-expense/{id}', [PurchaseController::class, 'update_full_expense']);
+Route::get('/delete-full-expense/{id}', [PurchaseController::class, 'delete_full_expense']);
